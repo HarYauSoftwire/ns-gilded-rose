@@ -4,7 +4,8 @@
         "target": "esnext",
         "strict": true,
         "noImplicitAny": false,
-        "sourceMap": false
+        "sourceMap": false,
+        "types": ["mocha"],
     },
     "exclude": [
         "node_modules"
