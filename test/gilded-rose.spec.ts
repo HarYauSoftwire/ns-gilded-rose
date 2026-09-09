@@ -51,4 +51,34 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.eql(0);
     });
 
+    it ('should increase the quality of an Aged Brie by 1', function () {
+        const gildedRose = new GildedRose([new Item('Aged Brie', 12, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(14);
+    });
+
+    it ('should not increase the quality of an Aged Brie with quality 50', function () {
+        const gildedRose = new GildedRose([new Item('Aged Brie', 12, 50)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(50);
+    });
+
+    it ('should increase the quality of an out-of-date Aged Brie by 2', function () {
+        const gildedRose = new GildedRose([new Item('Aged Brie', -3, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(15);
+    });
+
+    it ('should not increase the quality of an out-of-date Aged Brie with quality 50', function () {
+        const gildedRose = new GildedRose([new Item('Aged Brie', -3, 50)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(50);
+    });
+
+    it ('should not increase the quality of an out-of-date Aged Brie with quality 49 past 50', function () {
+        const gildedRose = new GildedRose([new Item('Aged Brie', -3, 49)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(50);
+    });
+
 });
