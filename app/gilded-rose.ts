@@ -18,8 +18,7 @@ export class GildedRose {
     }
 
     updateQuality() {
-        for (let i = 0; i < this.items.length; i++) {
-            const item = this.items[i];
+        for (const item of this.items) {
             if (item.name != 'Aged Brie' && item.name != 'Backstage passes to a TAFKAL80ETC concert') {
                 if (item.quality > 0) {
                     if (item.name != 'Sulfuras, Hand of Ragnaros') {
