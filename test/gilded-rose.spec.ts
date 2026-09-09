@@ -81,4 +81,22 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.eql(50);
     });
 
+    it ('should not change the sell-in of a Sulfuras', function () {
+        const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 12, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].sellIn).to.eql(12);
+    });
+
+    it ('should not change the quality of a Sulfuras', function () {
+        const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', 12, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(13);
+    });
+
+    it ('should not change the quality of an out-of-date Sulfuras', function () {
+        const gildedRose = new GildedRose([new Item('Sulfuras, Hand of Ragnaros', -3, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(13);
+    });
+
 });
