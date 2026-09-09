@@ -18,11 +18,15 @@ export class GildedRose {
     }
 
     private increaseQuality(originalQuality: number, change: number) {
-        return Math.max(originalQuality, Math.min(originalQuality + change, 50));
+        const newQuality = originalQuality + change;
+        const cappedNewQuality = Math.min(newQuality, 50);
+        return Math.max(originalQuality, cappedNewQuality);
     }
 
     private decreaseQuality(originalQuality: number, change: number) {
-        return Math.min(originalQuality, Math.max(originalQuality - change, 0));
+        const newQuality = originalQuality - change;
+        const cappedNewQuality = Math.max(newQuality, 0);
+        return Math.min(originalQuality, cappedNewQuality);
     }
 
     updateQuality() {
