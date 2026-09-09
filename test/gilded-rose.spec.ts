@@ -111,4 +111,58 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.eql(13);
     });
 
+    it ('should increase the quality of a Backstage pass with sell-in > 11 by 1', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 12, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(14);
+    });
+
+    it ('should increase the quality of a Backstage pass with sell-in 11 by 1', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 11, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(14);
+    });
+
+    it ('should increase the quality of a Backstage pass with sell-in between 6 and 10 by 2', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 8, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(15);
+    });
+
+    it ('should increase the quality of a Backstage pass with sell-in 6 by 2', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 6, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(15);
+    });
+
+    it ('should increase the quality of a Backstage pass with sell-in between 1 and 5 by 3', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 3, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(16);
+    });
+
+    it ('should increase the quality of a Backstage pass with sell-in of 1 by 3', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 1, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(16);
+    });
+
+    it ('should set the quality of a Backstage pass with sell-in of 0 to 0', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 0, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(0);
+    });
+
+    it ('should set the quality of a Backstage pass with a negative sell-in to 0', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', -2, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(0);
+    });
+
+    it ('should not increase the quality of a Backstage pass past 50', function () {
+        const gildedRose = new GildedRose([new Item('Backstage passes to a TAFKAL80ETC concert', 1, 49)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(50);
+    });
+
 });
