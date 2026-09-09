@@ -39,6 +39,12 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.eql(11);
     });
 
+    it ('should lower the quality of a normal item with sell-in 0 and with positive quality by 2', function () {
+        const gildedRose = new GildedRose([new Item('Foo', 0, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(11);
+    });
+
     it ('should not lower the quality of an out-of-date normal item with zero quality', function () {
         const gildedRose = new GildedRose([new Item('Foo', -3, 0)]);
         const items = gildedRose.updateQuality();
@@ -65,6 +71,12 @@ describe('Gilded Rose', function () {
 
     it ('should increase the quality of an out-of-date Aged Brie by 2', function () {
         const gildedRose = new GildedRose([new Item('Aged Brie', -3, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(15);
+    });
+
+    it ('should increase the quality of an Aged Brie with sell-in 0 by 2', function () {
+        const gildedRose = new GildedRose([new Item('Aged Brie', 0, 13)]);
         const items = gildedRose.updateQuality();
         expect(items[0].quality).to.eql(15);
     });
