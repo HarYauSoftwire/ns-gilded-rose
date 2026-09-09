@@ -21,6 +21,10 @@ export class GildedRose {
         return Math.max(originalQuality, Math.min(originalQuality + change, 50));
     }
 
+    private decreaseQuality(originalQuality: number, change: number) {
+        return Math.min(originalQuality, Math.max(originalQuality - change, 0));
+    }
+
     updateQuality() {
         for (const item of this.items) {
             if (item.name === 'Sulfuras, Hand of Ragnaros') {
@@ -43,13 +47,10 @@ export class GildedRose {
                     item.quality = 0;
                 }
             } else {
-                if (item.quality > 0) {
-                    item.quality -= 1;
-                }
-                if (item.sellIn <= 0) {
-                    if (item.quality > 0) {
-                        item.quality -= 1;
-                    }
+                if (item.sellIn > 0) {
+                    item.quality = this.decreaseQuality(item.quality, 1);
+                } else {
+                    item.quality = this.decreaseQuality(item.quality, 2);
                 }
             }
             item.sellIn -= 1;
