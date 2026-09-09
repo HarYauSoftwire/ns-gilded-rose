@@ -34,27 +34,31 @@ export class GildedRose {
             if (item.name === 'Sulfuras, Hand of Ragnaros') {
                 continue;
             }
-            if (item.name == 'Aged Brie') {
-                if (item.sellIn > 0) {
-                    item.quality = this.increaseQuality(item.quality, 1);
-                } else {
-                    item.quality = this.increaseQuality(item.quality, 2);
-                }
-            } else if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
+            if (item.name == 'Backstage passes to a TAFKAL80ETC concert') {
+                let qualityChange: number;
                 if (item.sellIn > 10) {
-                    item.quality = this.increaseQuality(item.quality, 1);
+                    qualityChange = 1;
                 } else if (item.sellIn > 5) {
-                    item.quality = this.increaseQuality(item.quality, 2);
-                } else if (item.sellIn > 0) {
-                    item.quality = this.increaseQuality(item.quality, 3);
+                    qualityChange = 2;
+                } else {
+                    qualityChange = 3;
+                }
+                if (item.sellIn > 0) {
+                    item.quality = this.increaseQuality(item.quality, qualityChange);
                 } else {
                     item.quality = 0;
                 }
             } else {
+                let qualityChange: number;
                 if (item.sellIn > 0) {
-                    item.quality = this.decreaseQuality(item.quality, 1);
+                    qualityChange = 1;
                 } else {
-                    item.quality = this.decreaseQuality(item.quality, 2);
+                    qualityChange = 2;
+                }
+                if (item.name == 'Aged Brie') {
+                    item.quality = this.increaseQuality(item.quality, qualityChange);
+                } else {
+                    item.quality = this.decreaseQuality(item.quality, qualityChange);
                 }
             }
             item.sellIn -= 1;
