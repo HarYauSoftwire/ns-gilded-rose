@@ -45,8 +45,7 @@ export class GildedRose {
                     item.quality -= 1;
                 }
             }
-            item.sellIn -= 1;
-            if (item.sellIn < 0) {
+            if (item.sellIn <= 0) {
                 if (item.name == 'Aged Brie') {
                     if (item.quality < 50) {
                         item.quality += 1;
@@ -59,6 +58,7 @@ export class GildedRose {
                     }
                 }
             }
+            item.sellIn -= 1;
         }
 
         return this.items;
