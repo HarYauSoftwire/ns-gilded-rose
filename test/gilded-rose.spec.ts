@@ -165,4 +165,40 @@ describe('Gilded Rose', function () {
         expect(items[0].quality).to.eql(50);
     });
 
+    it ('should lower the quality of a Conjured Mana Cake with positive quality by 2', function () {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 12, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(11);
+    });
+
+    it ('should not lower the quality of a Conjured Mana Cake with zero quality', function () {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 12, 0)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(0);
+    });
+
+    it ('should lower the quality of an out-of-date Conjured Mana Cake with positive quality by 4', function () {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', -3, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(9);
+    });
+
+    it ('should lower the quality of a Conjured Mana Cake with sell-in 0 and with positive quality by 4', function () {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', 0, 13)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(9);
+    });
+
+    it ('should not lower the quality of an out-of-date Conjured Mana Cake with zero quality', function () {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', -3, 0)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(0);
+    });
+
+    it ('should not lower the quality of an out-of-date Conjured Mana Cake past zero', function () {
+        const gildedRose = new GildedRose([new Item('Conjured Mana Cake', -3, 1)]);
+        const items = gildedRose.updateQuality();
+        expect(items[0].quality).to.eql(0);
+    });
+
 });
