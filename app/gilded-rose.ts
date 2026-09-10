@@ -57,6 +57,8 @@ export class GildedRose {
                 }
                 if (item.name == 'Aged Brie') {
                     item.quality = this.increaseQuality(item.quality, qualityChange);
+                } else if (item.name === 'Conjured Mana Cake') {
+                    item.quality = this.decreaseQuality(item.quality, 2 * qualityChange);
                 } else {
                     item.quality = this.decreaseQuality(item.quality, qualityChange);
                 }
